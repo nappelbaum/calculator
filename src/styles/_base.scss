@@ -1,0 +1,19 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.container-xxl {
+  padding-left: var(--container-pad-x) !important;
+  padding-right: var(--container-pad-x) !important;
+}
+
+body.lock {
+  overflow: hidden;
+}

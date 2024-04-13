@@ -1,0 +1,20 @@
+:root {
+  --container-pad-x: 4rem;
+
+  @media (max-width: 1400px) {
+    --container-pad-x: calc(2rem + 2vw);
+  }
+  @media (max-width: 1200px) {
+    --container-pad-x: calc(1.5rem + 1.5vw);
+  }
+  @media (max-width: 520px) {
+    --container-pad-x: 1.2rem;
+  }
+
+  --small-font: 0.8rem;
+
+  //form:
+  --input-border-color: #4e4e4e;
+  --primary-progress-color: rgb(89, 232, 153);
+  --secondary-progress-color: rgb(41, 182, 246);
+}

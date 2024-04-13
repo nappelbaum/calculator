@@ -1,0 +1,21 @@
+{
+  "creditTerms": [
+    { "months": 1, "name": "1 месяц" },
+    { "months": 3, "name": "3 месяца" },
+    { "months": 6, "name": "6 месяцев" },
+    { "months": 9, "name": "9 месяцев" },
+    { "months": 12, "name": "1 год" },
+    { "months": 18, "name": "1.5 года" },
+    { "months": 24, "name": "2 года" },
+    { "months": 36, "name": "3 года" },
+    { "months": 48, "name": "4 года" },
+    { "months": 60, "name": "5 лет" },
+    { "months": 72, "name": "6 лет" },
+    { "months": 84, "name": "7 лет" },
+    { "months": 120, "name": "10 лет" },
+    { "months": 180, "name": "15 лет" },
+    { "months": 240, "name": "20 лет" },
+    { "months": 300, "name": "25 лет" },
+    { "months": 360, "name": "30 лет" }
+  ]
+}

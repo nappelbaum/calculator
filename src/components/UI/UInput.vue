@@ -21,7 +21,7 @@ const debounceData = debounce((e) => {
 
 const onInput = (e) => {
   emit('setData', e.target.value)
-  e.target.value = props.data.value
+  if (e.target.value.match(/[^0-9\s]/gim)) e.target.value = props.data.value
   debounceData(e)
 }
 </script>
@@ -44,6 +44,7 @@ const onInput = (e) => {
           @input="onInput"
           class="form-control px-3 bg-transparent border-0 fw-semibold"
           :id="name"
+          @keydown.enter.prevent=""
         />
       </div>
     </label>

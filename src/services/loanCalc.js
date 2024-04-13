@@ -1,4 +1,4 @@
-export default function loanСalc(sum, rate, period) {
+export default function loanCalc(sum, rate, period) {
   const ratePart = rate / 100
   const monthRate = ratePart / 12
   const topPart = +(sum * monthRate)

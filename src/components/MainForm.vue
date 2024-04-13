@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <form class="row mt-4 bg-white rounded-2 shadow-sm">
+  <form @submit.prevent="" class="row mt-4 bg-white rounded-2 shadow-sm">
     <div class="calc col-lg p-4">
       <u-input
         title="Сумма кредита"

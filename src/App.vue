@@ -11,7 +11,7 @@ onMounted(async () => {
 
 <template>
   <nav-bar />
-  <main class="py-5 bg-light">
+  <main class="main py-5">
     <div class="container-xxl">
       <router-view></router-view>
     </div>
@@ -31,5 +31,9 @@ body {
     BlinkMacSystemFont,
     Arial,
     sans-serif !important;
+}
+
+.main {
+  background-color: var(--bg-color);
 }
 </style>

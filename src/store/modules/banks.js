@@ -3,26 +3,45 @@ import PostService from '@/API/PostService'
 export default {
   actions: {
     /** получение данных о банках и кредитах с фильтрами по сумме, ставке и сроке кредита*/
-    async fetchBanks({ commit }, { sum, rate, period }) {
-      const getData = await PostService.getBanks(sum, rate, period)
-      console.log(getData)
-      commit('SET_BANKS', getData)
+    async fetchBanks({ commit, rootGetters }, { sum, rate, period }) {
+      const sort = rootGetters['banks/sort']
+      const getBanks = await PostService.getBanks(sum, rate, period, sort)
+      console.log(getBanks)
+      commit('SET_BANKS', getBanks)
+      commit('SET_TOTAL_OFFERS', getBanks)
+    },
+    setSort({ commit }, sort) {
+      commit('SET_SORT', sort)
     }
   },
   mutations: {
     /** запись данных о банках с фильтрами*/
-    SET_BANKS(state, getData) {
-      if (getData) {
-        state.banks = getData
+    SET_BANKS(state, getBanks) {
+      if (getBanks) {
+        state.banks = getBanks
       }
+    },
+    SET_TOTAL_OFFERS(state, getBanks) {
+      state.totalOffers = getBanks.reduce((acc, el) => acc + el.creditResultRows.length, 0)
+    },
+    SET_SORT(state, sort) {
+      state.sort = sort
     }
   },
   state: {
-    banks: []
+    banks: [],
+    totalOffers: null,
+    sort: ''
   },
   getters: {
     banks(state) {
       return state.banks
+    },
+    totalOffers(state) {
+      return state.totalOffers
+    },
+    sort(state) {
+      return state.sort
     }
   },
   namespaced: true

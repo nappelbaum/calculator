@@ -17,7 +17,7 @@ const debouncedData = ref('')
 const debounceData = debounce((e) => {
   debouncedData.value = e.target.value
   emit('setDebounceData', debouncedData.value)
-}, 700)
+}, 800)
 
 const onInput = (e) => {
   emit('setData', e.target.value)

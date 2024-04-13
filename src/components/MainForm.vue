@@ -16,6 +16,7 @@ const creditRate = computed(() => store.getters['params/creditRate'])
 
 onMounted(() => {
   !creditTerms.value.length && store.dispatch('params/fetchTerms')
+  store.dispatch('params/setBanks')
 })
 </script>
 
@@ -26,22 +27,22 @@ onMounted(() => {
         title="Сумма кредита"
         name="sum"
         :data="{ value: creditSum, units: '₽' }"
-        @setData="(sum) => store.commit('params/SET_SUM', toNumber(sum))"
-        @setDebounceData="(sum) => store.commit('params/SET_SUM_DEB', toNumber(sum))"
+        @setData="(sum) => store.dispatch('params/setSum', toNumber(sum))"
+        @setDebounceData="(sum) => store.dispatch('params/setSumDeb', toNumber(sum))"
         :minmax="[toString(minMaxCreditSum.min) + ' ₽', toString(minMaxCreditSum.max) + ' ₽']"
       />
       <u-input
         title="Ставка"
         name="rate"
         :data="{ value: creditRate, units: '%' }"
-        @setData="(rate) => store.commit('params/SET_RATE', toNumber(rate))"
-        @setDebounceData="(rate) => store.commit('params/SET_RATE_DEB', toNumber(rate))"
+        @setData="(rate) => store.dispatch('params/setRate', toNumber(rate))"
+        @setDebounceData="(rate) => store.dispatch('params/setRateDeb', toNumber(rate))"
         :minmax="['Ключевая ставка Банка России']"
       />
       <u-dropdown
         :currentCreditPeriod="currentCreditPeriod"
         :creditTerms="creditTerms"
-        @setCurrentCreditPeriod="(period) => store.commit('params/SET_CURRENT_PERIOD', period)"
+        @setCurrentCreditPeriod="(period) => store.dispatch('params/setCurrentPeriod', period)"
       />
     </div>
     <div class="result col-lg p-4">

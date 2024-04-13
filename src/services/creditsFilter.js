@@ -1,5 +1,5 @@
 export default function creditsFilter(data, sum, rate, period) {
-  const filteredData = data.map((bank) => {
+  const filteredData = data.filter((bank) => {
     bank.creditResultRows = bank.creditResultRows.filter(
       (credit) =>
         sum >= credit.amountFrom &&
@@ -9,7 +9,8 @@ export default function creditsFilter(data, sum, rate, period) {
         period >= (credit.periodFrom / 365) * 12 &&
         period <= (credit.periodTo / 365) * 12
     )
-    return bank
+
+    return bank.creditResultRows.length
   })
 
   return filteredData

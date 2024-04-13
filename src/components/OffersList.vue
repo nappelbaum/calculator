@@ -1,15 +1,12 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
+import OfferBank from './OfferBank.vue'
+
 const store = useStore()
 
 // store.dispatch('banks/fetchBanks')
 const banks = computed(() => store.getters['banks/banks'])
-onMounted(() => {
-  setTimeout(() => {
-    console.log(banks.value)
-  }, 400)
-})
 </script>
 
 <template>
@@ -22,18 +19,11 @@ onMounted(() => {
 
   <section class="sort-list">
     <div class="d-flex flex-column mb-3 row">
-      <div v-for="bank in banks" :key="bank.bankId" class="shadow-sm bg-white rounded-2">
-        <div class="p-4 d-flex justify-content-between">
-          <div class="d-flex">
-            <img :src="bank.creditResultRows[0]?.bankLogo" alt="logo" />
-          </div>
-          <div class="">Flex item</div>
-          <div class="">Flex item</div>
-        </div>
-      </div>
+      <template v-for="bank in banks" :key="bank.bankId">
+        <offer-bank :offer="bank.creditResultRows" />
+      </template>
     </div>
   </section>
-  <pre>{{ banks }}</pre>
 </template>
 
 <style lang="scss" scoped>

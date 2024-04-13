@@ -5,6 +5,7 @@ export default {
     /** получение данных о банках и кредитах с фильтрами по сумме, ставке и сроке кредита*/
     async fetchBanks({ commit }, { sum, rate, period }) {
       const getData = await PostService.getBanks(sum, rate, period)
+      console.log(getData)
       commit('SET_BANKS', getData)
     }
   },

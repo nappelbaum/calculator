@@ -11,12 +11,21 @@ const start = {
 
 export default {
   actions: {
-    /** получение данных о всех сроках кредита и отслеживание изменений суммы, ставки и срока кредита
-     * (сумма и ставка отслеживаются с применением debounce) для запуска action получения списка банков*/
-    async fetchTerms({ state, commit, dispatch }) {
+    /** получение данных о всех сроках кредита */
+    async fetchTerms({ commit }) {
       const getData = await PostService.getTerms()
       commit('SET_TERMS', getData)
-
+    },
+    /** расчет всех параметров кредита (ежемесячный платеж, общая сумма, график платежей ..) в зависимости от изменения суммы, ставки и срока кредита */
+    getResult({ state, commit }) {
+      watchEffect(() => {
+        const { creditSum, creditRate, currentCreditPeriod } = state
+        const dataRes = loanСalc(creditSum, creditRate, currentCreditPeriod.months)
+        commit('SET_RESULT', dataRes)
+      })
+    },
+    /** запуск action для получения списка банков в зависимости от суммы, ставки и срока кредита (сумма и ставка отслеживаются с применением debounce) */
+    setBanks({ state, dispatch }) {
       watchEffect(() => {
         console.log('effff')
         const { creditSumDebounce, creditRateDebounce, currentCreditPeriod } = state
@@ -29,17 +38,24 @@ export default {
         )
       })
     },
-    /** расчет всех параметров кредита (ежемесячный платеж, общая сумма, график платежей ..) в зависимости от изменения суммы, ставки и срока кредита*/
-    getResult({ state, commit }) {
-      watchEffect(() => {
-        const { creditSum, creditRate, currentCreditPeriod } = state
-        const dataRes = loanСalc(creditSum, creditRate, currentCreditPeriod.months)
-        commit('SET_RESULT', dataRes)
-      })
+    setCurrentPeriod({ commit }, term) {
+      commit('SET_CURRENT_PERIOD', term)
+    },
+    setSum({ commit }, sum) {
+      commit('SET_SUM', sum)
+    },
+    setRate({ commit }, rate) {
+      commit('SET_RATE', rate)
+    },
+    setSumDeb({ commit }, sum) {
+      commit('SET_SUM_DEB', sum)
+    },
+    setRateDeb({ commit }, rate) {
+      commit('SET_RATE_DEB', rate)
     }
   },
   mutations: {
-    /** запись данных о всех сроках и о начальном(текущем) периоде(сроке) кредита*/
+    /** запись данных о всех сроках и о начальном(текущем) периоде(сроке) кредита */
     SET_TERMS(state, getData) {
       if (getData) {
         state.creditTerms = getData
@@ -59,7 +75,11 @@ export default {
     },
     /** изменение ставки кредита*/
     SET_RATE(state, rate) {
-      state.creditRate = rate ? rate : 0
+      if (rate > 1000) {
+        state.creditRate = 1000
+        return
+      }
+      state.creditRate = rate ? rate : 1
     },
     /** запись всех параметров кредита*/
     SET_RESULT(state, dataRes) {

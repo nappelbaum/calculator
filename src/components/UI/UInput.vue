@@ -1,13 +1,16 @@
 <script setup>
 import { ref } from 'vue'
 import debounce from 'lodash.debounce'
+import toNumber from '@/services/toNumber'
+import toString from '@/services/toString'
 
 const props = defineProps({
   title: String,
   name: String,
   data: Object,
   units: String,
-  minmax: Array
+  minmax: Array,
+  max: Number
 })
 
 const emit = defineEmits(['setData', 'setDebounceData'])
@@ -21,7 +24,11 @@ const debounceData = debounce((e) => {
 
 const onInput = (e) => {
   emit('setData', e.target.value)
-  if (e.target.value.match(/[^0-9\s]/gim)) e.target.value = props.data.value
+  e.target.value =
+    toNumber(e.target.value) > props.max ? props.data.value : toString(toNumber(e.target.value))
+
+  // if (props.name == 'rate' && e.target.value == 0) e.target.value = ''
+  // if (e.target.value.match(/[^0-9\s]/gim)) e.target.value = props.data.value
   debounceData(e)
 }
 </script>

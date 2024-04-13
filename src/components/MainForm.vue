@@ -13,6 +13,7 @@ const currentCreditPeriod = computed(() => store.getters['params/currentCreditPe
 const creditSum = computed(() => toString(store.getters['params/creditSum']))
 const minMaxCreditSum = computed(() => store.getters['params/minMaxCreditSum'])
 const creditRate = computed(() => store.getters['params/creditRate'])
+const minMaxCreditRate = computed(() => store.getters['params/minmaxCreditRate'])
 
 onMounted(() => {
   !creditTerms.value.length && store.dispatch('params/fetchTerms')
@@ -30,6 +31,7 @@ onMounted(() => {
         @setData="(sum) => store.dispatch('params/setSum', toNumber(sum))"
         @setDebounceData="(sum) => store.dispatch('params/setSumDeb', toNumber(sum))"
         :minmax="[toString(minMaxCreditSum.min) + ' ₽', toString(minMaxCreditSum.max) + ' ₽']"
+        :max="minMaxCreditSum.max"
       />
       <u-input
         title="Ставка"
@@ -38,6 +40,7 @@ onMounted(() => {
         @setData="(rate) => store.dispatch('params/setRate', toNumber(rate))"
         @setDebounceData="(rate) => store.dispatch('params/setRateDeb', toNumber(rate))"
         :minmax="['Ключевая ставка Банка России']"
+        :max="minMaxCreditRate.max"
       />
       <u-dropdown
         :currentCreditPeriod="currentCreditPeriod"

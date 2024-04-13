@@ -6,6 +6,7 @@ const start = {
   sum: 300000,
   rate: 16,
   minmax: { min: 5000, max: 100000000 },
+  minmaxRate: { min: 1, max: 500 },
   period: { months: 60, name: '5 лет' }
 }
 
@@ -76,8 +77,8 @@ export default {
     },
     /** изменение ставки кредита*/
     SET_RATE(state, rate) {
-      if (rate > 1000) {
-        state.creditRate = 1000
+      if (rate > state.minmaxCreditRate.max) {
+        state.creditRate = state.minmaxCreditRate.max
         return
       }
       state.creditRate = rate ? rate : 1
@@ -100,6 +101,7 @@ export default {
     creditSum: start.sum,
     minMaxCreditSum: start.minmax,
     creditRate: start.rate,
+    minmaxCreditRate: start.minmaxRate,
     currentCreditPeriod: start.period,
     result: {},
     creditSumDebounce: start.sum,
@@ -120,6 +122,9 @@ export default {
     },
     minMaxCreditSum(state) {
       return state.minMaxCreditSum
+    },
+    minmaxCreditRate(state) {
+      return state.minmaxCreditRate
     },
     result(state) {
       return state.result

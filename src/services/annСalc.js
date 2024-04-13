@@ -5,5 +5,5 @@ export default function annCalc(sum, rate, period) {
   const bottomPart = +(1 - 1 / Math.pow(monthRate + 1, period))
   const annMonts = +(topPart / bottomPart).toFixed(0)
 
-  return annMonts
+  return rate ? annMonts : 0
 }

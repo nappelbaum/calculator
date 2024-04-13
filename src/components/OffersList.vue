@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import OfferBank from './OfferBank.vue'
 import getNoun from '@/services/getNoun'
@@ -12,6 +12,10 @@ const totalOffers = computed(() => store.getters['banks/totalOffers'])
 const setSort = (value) => {
   store.dispatch('banks/setSort', value)
 }
+
+onMounted(() => {
+  store.dispatch('banks/setSort', '')
+})
 </script>
 
 <template>
@@ -33,11 +37,11 @@ const setSort = (value) => {
       </div>
     </div>
 
-    <div name="banks" class="d-flex flex-column mb-3 row">
-      <div v-for="bank in banks" :key="bank.bankId" class="mb-2">
+    <transition-group tag="ul" name="mybanks" class="d-flex flex-column mb-3 p-0 row">
+      <li v-for="bank in banks" :key="bank.bankId" class="mb-2">
         <offer-bank :offer="bank.creditResultRows" />
-      </div>
-    </div>
+      </li>
+    </transition-group>
   </section>
 </template>
 
@@ -46,19 +50,7 @@ const setSort = (value) => {
   column-gap: 3rem;
 }
 
-// .banks-enter-active,
-// .banks-move {
-//   transition: 0.4s ease all;
-// }
-
-// .banks-enter-from,
-// .banks-leave-to {
-//   opacity: 0;
-//   transform: scale(0.6);
-// }
-
-// .banks-leave-active {
-//   transition: 0.4s ease all;
-//   position: absolute;
-// }
+.mybanks-move {
+  transition: transform 0.5s ease-in;
+}
 </style>

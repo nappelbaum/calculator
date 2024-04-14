@@ -24,7 +24,14 @@ const creditRate = computed(() => store.getters['params/creditRate'])
         <div>
           <header class="modal-body__header">
             <h3 class="modal-body-title">График платежей по кредиту</h3>
-            <div class="modal-body-close" @click.self="emit('close')">&#10006;</div>
+            <div
+              class="modal-body-close"
+              tabindex="0"
+              @click.self="emit('close')"
+              @keydown.enter="emit('close')"
+            >
+              &#10006;
+            </div>
           </header>
           <div class="modal-body__content">
             <div class="modal-body__subtitle">

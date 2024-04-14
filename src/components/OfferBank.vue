@@ -23,7 +23,7 @@ defineProps({
         class="credit shadow-sm bg-white rounded-2 border-bottom border-1 overflow-hidden"
         :class="[{ 'credit-collapse': i }, show && i ? 'credit-show' : '']"
       >
-        <div class="p-4 d-flex">
+        <div class="p-4 d-flex flex-column flex-lg-row position-relative">
           <div class="credit__col1">
             <div class="d-flex gap-3 align-items-start">
               <div class="">
@@ -68,27 +68,27 @@ defineProps({
               </div>
             </div>
           </div>
-          <div class="credit__col2">
-            <div class="d-flex justify-content-between">
-              <div>
+          <div class="credit__col2 d-flex flex-column-reverse flex-lg-column">
+            <div class="d-flex justify-content-between flex-column flex-lg-row">
+              <div class="d-flex flex-wrap gap-2 justify-content-between mt-3 d-lg-block mt-lg-0">
                 <span>Платёж</span>
                 <div class="credit__important-info">
                   {{ toString(annCalc(creditSum, credit.rateMin, creditPeriod.months)) }} ₽ -
                   {{ toString(annCalc(creditSum, credit.rateMax, creditPeriod.months)) }} ₽
                 </div>
               </div>
-              <div>
+              <div class="d-flex justify-content-between mt-2 d-lg-block mt-lg-0">
                 <span>Сумма</span>
                 <div class="credit__important-info">до {{ toString(credit.amountTo) }} ₽</div>
               </div>
-              <div>
+              <div class="d-flex justify-content-between mt-2 d-lg-block mt-lg-0">
                 <span>Срок</span>
                 <div class="credit__important-info">
                   до {{ Math.round(credit.periodTo / 365) }} лет
                 </div>
               </div>
             </div>
-            <div class="d-flex mt-2 gap-2">
+            <div class="d-flex mt-3 mt-lg-2 gap-2">
               <span v-if="credit.specialTag" class="bg-info px-2 rounded-1 text-black">{{
                 credit.specialTag
               }}</span>
@@ -96,7 +96,9 @@ defineProps({
               <span class="bg-light px-2 rounded-1 text-black">На любые цели</span>
             </div>
           </div>
-          <div class="credit__col3 d-flex align-items-center justify-content-center">
+          <div
+            class="credit__col3 d-flex align-items-center justify-content-start justify-content-lg-center"
+          >
             <div class="border border-1 rounded-3" title="info">
               <img src="/img/info.svg" alt="info" />
             </div>
@@ -110,11 +112,15 @@ defineProps({
 <style lang="scss" scoped>
 .credit {
   font-family: 'Roboto', sans-serif;
-  height: 136px;
+  height: auto;
 
   &__col1 {
     flex: 0 0 35%;
     padding-right: 2em;
+
+    @media (max-width: 992px) {
+      padding-right: 0;
+    }
 
     .credit__show {
       display: inline-block !important;
@@ -125,6 +131,10 @@ defineProps({
   &__col2 {
     flex: 1 0 50%;
     padding-right: 3em;
+
+    @media (max-width: 992px) {
+      padding-right: 0;
+    }
 
     .credit__important-info {
       font-size: 1.1rem;
@@ -152,9 +162,17 @@ defineProps({
 }
 
 .credit-show {
-  height: 136px;
+  height: 130px;
   color: #000;
   overflow: initial;
+
+  @media (max-width: 992px) {
+    height: 300px;
+    border: solid 1px #dfdfdf;
+  }
+  @media (max-width: 480px) {
+    height: auto;
+  }
 }
 
 .credit-shadow {

@@ -33,7 +33,7 @@ export default function loanCalc(sum, rate, period) {
     })
   }
 
-  return period
+  return period && rate && sum
     ? { annMonts, overPay, totalSum, schedule }
-    : { annMonts: '', overPay: '', totalSum: '', schedule: [] }
+    : { annMonts: 0, overPay: 0, totalSum: 0, schedule: [] }
 }

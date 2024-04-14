@@ -21,7 +21,7 @@ onMounted(() => {
 <template>
   <section class="sort-list">
     <div class="sort-offers p-4 pb-1">
-      <div class="d-flex flex-wrap align-items-center pt-4">
+      <div class="d-flex flex-wrap align-items-center pt-3">
         <div class="mb-3">
           {{ totalOffers }}
           {{ getNoun(totalOffers, ['предложение', 'предложения', 'предложений']) }}

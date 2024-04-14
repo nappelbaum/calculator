@@ -22,17 +22,6 @@ onMounted(async () => {
 <style>
 @import './styles/_main.scss';
 
-body {
-  font-family:
-    'Montserrat',
-    'Segoe UI',
-    'Roboto',
-    -apple-system,
-    BlinkMacSystemFont,
-    Arial,
-    sans-serif !important;
-}
-
 .main {
   background-color: var(--bg-color);
 }

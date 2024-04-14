@@ -81,7 +81,7 @@ export default {
         state.creditRate = state.minmaxCreditRate.max
         return
       }
-      state.creditRate = rate ? rate : 1
+      state.creditRate = rate ? rate : 0
     },
     /** запись всех параметров кредита*/
     SET_RESULT(state, dataRes) {

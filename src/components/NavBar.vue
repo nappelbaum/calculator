@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md bg-white py-3 py-md-2 shadow-sm">
+  <nav class="navbar navbar-expand-md bg-white py-3 shadow-sm">
     <div class="container-xxl">
       <router-link to="/" class="navbar-brand">The Bank</router-link>
       <button

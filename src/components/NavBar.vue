@@ -28,7 +28,8 @@
 </template>
 
 <style lang="scss" scoped>
-.router-link-active {
-  color: #222;
+.router-link-active,
+.router-link-exact-active {
+  color: #000000 !important;
 }
 </style>

@@ -18,6 +18,11 @@ button {
   &:focus {
     border-color: var(--input-border-color);
   }
+
+  &:disabled {
+    color: #fff !important;
+    opacity: 1 !important;
+  }
 }
 .blue {
   background-color: var(--secondary-progress-color);

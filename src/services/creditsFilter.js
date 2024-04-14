@@ -15,3 +15,5 @@ export default function creditsFilter(data, sum, rate, period) {
 
   return filteredData
 }
+
+// Фильтрация массива банков по сумме, ставке и сроку кредита

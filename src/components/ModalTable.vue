@@ -37,7 +37,7 @@ const { result1, result2, result3 } = sheduleSplit(result.value.schedule, result
 
     <tr v-if="result2.length && !show" class="border-bottom border-body-tertiary">
       <td class="d-flex align-items-center">
-        <button @click="show = true" class="d-flex bg-white">
+        <button @click="show = true" @keydown.enter="show = true" class="d-flex bg-white drop-btn">
           <div class="text-primary fs-6 fw-bold">Показать ещё</div>
           <u-arrow-btn :show="show" />
         </button>
@@ -55,5 +55,9 @@ td {
   text-align: left;
   padding: 24px 6px;
   white-space: nowrap;
+}
+
+.drop-btn:focus {
+  border: solid 1px #5a5a5a;
 }
 </style>

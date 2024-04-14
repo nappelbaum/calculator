@@ -7,3 +7,5 @@ export default function bodyLock(open) {
     }, 50)
   })
 }
+
+// Блокировка прокрутки body при открытие модального окна

@@ -7,3 +7,5 @@ export default function annCalc(sum, rate, period) {
 
   return rate ? annMonts : 0
 }
+
+// Расчет ежемесячного платежа по кредиту

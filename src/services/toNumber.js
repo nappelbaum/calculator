@@ -5,3 +5,5 @@ export default function toNumber(string) {
 
   return parseNumber
 }
+
+// Преобразование текста из инпута в число

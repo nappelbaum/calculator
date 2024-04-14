@@ -28,7 +28,7 @@ onMounted(() => {
     </div>
     <div v-show="totalOffers !== 0" class="sort-offers p-4 pb-1">
       <div class="d-flex flex-wrap align-items-center pt-3">
-        <div class="mb-3">
+        <div class="mb-3 sort-offers__total">
           {{ totalOffers }}
           {{ getNoun(totalOffers, ['предложение', 'предложения', 'предложений']) }}
         </div>
@@ -36,7 +36,7 @@ onMounted(() => {
           class="mb-3"
           :options="[
             { value: '', name: 'По популярности' },
-            { value: 'min', name: 'По минимальной сумме' }
+            { value: 'min', name: 'По минимальному платежу' }
           ]"
           @setSort="setSort"
         />
@@ -54,6 +54,10 @@ onMounted(() => {
 <style lang="scss" scoped>
 .sort-offers > div {
   column-gap: 3rem;
+
+  .sort-offers__total {
+    user-select: none;
+  }
 }
 
 .mybanks-move {

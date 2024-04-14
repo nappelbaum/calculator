@@ -33,7 +33,9 @@ export default function loanCalc(sum, rate, period) {
     })
   }
 
-  return period && rate && sum
+  return period && rate && sum && sum >= 30
     ? { annMonts, overPay, totalSum, schedule }
     : { annMonts: 0, overPay: 0, totalSum: 0, schedule: [] }
 }
+
+// Расчет всех показателей кредита: ежемесячный платеж, переплата, общая сумма, график платежей

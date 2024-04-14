@@ -53,7 +53,7 @@ onMounted(() => {
         <h3 class="fs-4 fw-bold mb-3">Результаты расчета</h3>
         <calc-results />
         <h3 class="fs-4 fw-bold my-4">Получите реальные условия от банков</h3>
-        <u-button color="blue" name="Заполнить анкету" />
+        <u-button color="blue" name="Заполнить анкету" disabled />
       </div>
     </div>
   </form>

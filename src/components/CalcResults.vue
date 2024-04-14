@@ -76,7 +76,7 @@ onMounted(() => {
   &:hover {
     color: var(--secondary-progress-color);
   }
-  &:focus {
+  &:focus-visible {
     outline: solid 1px #000 !important;
   }
 }

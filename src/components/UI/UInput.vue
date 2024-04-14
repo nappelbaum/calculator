@@ -55,6 +55,7 @@ const onInput = (e) => {
           class="form-control px-3 bg-transparent border-0 fw-semibold"
           :id="name"
           @keydown.enter.prevent=""
+          autocomplete="off"
         />
       </div>
     </label>

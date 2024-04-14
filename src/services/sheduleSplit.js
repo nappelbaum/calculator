@@ -19,3 +19,5 @@ export default function sheduleSplit(schedule, annMonts) {
 
   return { result1, result2, result3 }
 }
+
+// Разделение массива графика платежей для вывода с кнопкой "Показать ещё"

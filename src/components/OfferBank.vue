@@ -41,6 +41,7 @@ defineProps({
               class="credit__show mt-3"
               tabindex="0"
               @click="show = !show"
+              @keydown.enter="show = !show"
             >
               <offer-dropdown :offerLength="offer.length" :show="show" />
             </div>
@@ -76,9 +77,9 @@ defineProps({
           <div
             class="credit__col3 d-flex align-items-center justify-content-start mt-2 justify-content-lg-center mt-lg-0"
           >
-            <div class="border border-1 rounded-3" title="info">
+            <router-link :to="credit.productUrl" class="border border-1 rounded-3" title="info">
               <img src="/img/info.svg" alt="info" />
-            </div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -130,7 +131,7 @@ defineProps({
     }
   }
   &__col3 {
-    > div {
+    > a {
       padding: 0.8rem;
       cursor: pointer;
     }

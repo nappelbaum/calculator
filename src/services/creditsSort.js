@@ -1,9 +1,9 @@
 export default function creditsSort(filteredData) {
   filteredData.sort((a, b) => {
     const minCalc = (credits) => {
-      let min = credits[0].amountFrom
+      let min = credits[0].rateMin
       for (let i = 1; i < credits.length; i++) {
-        if (credits[i].amountFrom < credits[i - 1].amountFrom) min = credits[i].amountFrom
+        if (credits[i].rateMin < credits[i - 1].rateMin) min = credits[i].rateMin
       }
       return min
     }
@@ -14,3 +14,5 @@ export default function creditsSort(filteredData) {
     return a - b
   })
 }
+
+// Сортировка массива банков по минимальному платежу кредита

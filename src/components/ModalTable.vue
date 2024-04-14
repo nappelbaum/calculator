@@ -1,11 +1,16 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import toString from '@/services/toString'
+import ModalRow from './ModalRow.vue'
+import sheduleSplit from '@/services/sheduleSplit'
 
 const store = useStore()
 
 const result = computed(() => store.getters['params/result'])
+
+const show = ref(false)
+
+const { result1, result2, result3 } = sheduleSplit(result.value.schedule, result.value.annMonts)
 </script>
 
 <template>
@@ -28,28 +33,19 @@ const result = computed(() => store.getters['params/result'])
       </td>
     </tr>
 
-    <tr
-      v-for="({ date, restSum, percent, paid }, i) in result.schedule"
-      :key="date"
-      class="border-bottom border-body-tertiary"
-    >
-      <td>
-        <div class="text-secondary-emphasis">{{ date }}</div>
-        <div class="pay-number text-secondary">{{ i + 1 }} платеж</div>
-      </td>
-      <td>
-        <div class="text-secondary-emphasis">{{ toString(restSum) }}</div>
-      </td>
-      <td>
-        <div class="text-secondary-emphasis">{{ toString(percent) }}</div>
-      </td>
-      <td>
-        <div class="text-secondary-emphasis">{{ toString(paid) }}</div>
-      </td>
-      <td>
-        <div class="text-secondary-emphasis">{{ toString(result.annMonts) }}</div>
+    <modal-row :result="result1" />
+
+    <tr v-if="result2.length && !show" class="border-bottom border-body-tertiary">
+      <td class="d-flex align-items-center">
+        <button @click="show = true" class="d-flex bg-white">
+          <div class="text-primary fs-6 fw-bold">Показать ещё</div>
+          <u-arrow-btn :show="show" />
+        </button>
       </td>
     </tr>
+
+    <modal-row v-if="show" :result="result2" />
+    <modal-row :result="result3" />
   </table>
 </template>
 
@@ -59,9 +55,5 @@ td {
   text-align: left;
   padding: 24px 6px;
   white-space: nowrap;
-}
-
-.pay-number {
-  font-size: 0.8rem;
 }
 </style>

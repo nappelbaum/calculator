@@ -6,6 +6,7 @@ import getNoun from '@/services/getNoun'
 
 const store = useStore()
 
+const banksLoadError = computed(() => store.getters['banks/banksLoadError'])
 const banks = computed(() => store.getters['banks/banks'])
 const totalOffers = computed(() => store.getters['banks/totalOffers'])
 
@@ -19,8 +20,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="sort-list">
-    <div class="sort-offers p-4 pb-1">
+  <div v-if="banksLoadError" class="mt-4 text-danger"><b>Data loading error</b></div>
+  <section v-else class="sort-list">
+    <div v-show="totalOffers === 0" class="text-center mt-5">
+      <h3 class="fs-4">Кредитов по вашим параметрам не найдено</h3>
+      <p>Измените, пожалуйста, параметры поиска</p>
+    </div>
+    <div v-show="totalOffers !== 0" class="sort-offers p-4 pb-1">
       <div class="d-flex flex-wrap align-items-center pt-3">
         <div class="mb-3">
           {{ totalOffers }}

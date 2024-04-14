@@ -13,9 +13,9 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse flex-grow-0 pt-3 pt-md-0" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
         <ul class="navbar-nav gap-md-3">
-          <li class="nav-item">
+          <li class="nav-item mt-3 mt-md-0">
             <router-link to="/" class="nav-link" aria-current="page">Home</router-link>
           </li>
           <li class="nav-item">

@@ -3,7 +3,7 @@ import { useStore } from 'vuex'
 import { computed, ref } from 'vue'
 import toString from '@/services/toString'
 import annCalc from '@/services/annСalc'
-import getNoun from '@/services/getNoun'
+import OfferDropdown from './OfferDropdown.vue'
 
 const store = useStore()
 const show = ref(false)
@@ -17,7 +17,7 @@ defineProps({
 </script>
 
 <template>
-  <div :class="{ 'credit-shadow': show }" class="overflow-hidden">
+  <div :class="{ 'credit-shadow': show }" class="credit-wrapper">
     <template v-for="(credit, i) in offer" :key="credit.id">
       <div
         class="credit shadow-sm bg-white rounded-2 border-bottom border-1 overflow-hidden"
@@ -42,30 +42,7 @@ defineProps({
               tabindex="0"
               @click="show = !show"
             >
-              <div class="d-flex align-items-center">
-                <span class="text-primary fs-6 fw-bold"
-                  >Еще {{ offer.length - 1 }}
-                  {{ getNoun(offer.length - 1, ['кредит', 'кредита', 'кредитов']) }}</span
-                >
-                <span class="mx-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="15"
-                    height="15"
-                    viewBox="0 0 16 16"
-                    fill="#3e61fd"
-                  >
-                    <path
-                      v-if="!show"
-                      d="M8 12a.997.997 0 0 1-.707-.293l-5-5a.999.999 0 1 1 1.414-1.414L8 9.586l4.293-4.293a.999.999 0 1 1 1.414 1.414l-5 5A.997.997 0 0 1 8 12z"
-                    ></path>
-                    <path
-                      v-if="show"
-                      d="M8 4a.997.997 0 0 0-.707.293l-5 5a.999.999 0 1 0 1.414 1.414L8 6.414l4.293 4.293a.999.999 0 1 0 1.414-1.414l-5-5A.997.997 0 0 0 8 4z"
-                    ></path>
-                  </svg>
-                </span>
-              </div>
+              <offer-dropdown :offerLength="offer.length" :show="show" />
             </div>
           </div>
           <div class="credit__col2 d-flex flex-column-reverse flex-lg-column">
@@ -97,7 +74,7 @@ defineProps({
             </div>
           </div>
           <div
-            class="credit__col3 d-flex align-items-center justify-content-start justify-content-lg-center"
+            class="credit__col3 d-flex align-items-center justify-content-start mt-2 justify-content-lg-center mt-lg-0"
           >
             <div class="border border-1 rounded-3" title="info">
               <img src="/img/info.svg" alt="info" />
@@ -110,6 +87,17 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
+.credit-wrapper {
+  overflow: hidden;
+  box-shadow: none;
+  transition: box-shadow 0.5s ease;
+}
+
+.credit-shadow {
+  box-shadow: 0 0 15px -2px #727272 !important;
+  transition: box-shadow 0.5s ease;
+}
+
 .credit {
   font-family: 'Roboto', sans-serif;
   height: auto;
@@ -173,10 +161,5 @@ defineProps({
   @media (max-width: 480px) {
     height: auto;
   }
-}
-
-.credit-shadow {
-  box-shadow: 0 0 15px -2px #727272 !important;
-  transition: box-shadow 0.5s ease;
 }
 </style>

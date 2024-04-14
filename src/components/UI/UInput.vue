@@ -24,11 +24,14 @@ const debounceData = debounce((e) => {
 
 const onInput = (e) => {
   emit('setData', e.target.value)
-  e.target.value =
-    toNumber(e.target.value) > props.max ? props.data.value : toString(toNumber(e.target.value))
 
-  // if (props.name == 'rate' && e.target.value == 0) e.target.value = ''
-  // if (e.target.value.match(/[^0-9\s]/gim)) e.target.value = props.data.value
+  e.target.value =
+    toNumber(e.target.value) > props.max
+      ? props.data.value
+      : toNumber(e.target.value)
+        ? toString(toNumber(e.target.value))
+        : ''
+
   debounceData(e)
 }
 </script>
@@ -42,12 +45,12 @@ const onInput = (e) => {
       <span class="px-3">{{ title }}</span>
       <div class="input__wrapper">
         <div class="input__mask fw-semibold px-3">
-          <span>{{ data.value }}</span>
-          <span>{{ data.units }}</span>
+          <span>{{ data.value != 0 ? data.value : '' }}</span>
+          <span>{{ data.value != 0 ? data.units : '' }}</span>
         </div>
         <input
           type="text"
-          :value="data.value"
+          :value="data.value != 0 ? data.value : ''"
           @input="onInput"
           class="form-control px-3 bg-transparent border-0 fw-semibold"
           :id="name"

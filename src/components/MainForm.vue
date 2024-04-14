@@ -49,7 +49,7 @@ onMounted(() => {
       />
     </div>
     <div class="result col-lg p-4">
-      <div class="bg-light rounded-2 p-4">
+      <div class="bg-light rounded-2 p-4 pb-0">
         <h3 class="fs-4 fw-bold mb-3">Результаты расчета</h3>
         <calc-results />
         <h3 class="fs-4 fw-bold my-4">Получите реальные условия от банков</h3>

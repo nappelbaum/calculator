@@ -20,7 +20,6 @@ export default {
     /** расчет всех параметров кредита (ежемесячный платеж, общая сумма, график платежей ..) в зависимости от изменения суммы, ставки и срока кредита */
     getResult({ state, commit }) {
       watchEffect(() => {
-        console.log('расчет')
         const { creditSum, creditRate, currentCreditPeriod } = state
         const dataRes = loanCalc(creditSum, creditRate, currentCreditPeriod.months)
         commit('SET_RESULT', dataRes)
@@ -29,7 +28,6 @@ export default {
     /** запуск action для получения списка банков в зависимости от суммы, ставки и срока кредита (сумма и ставка отслеживаются с применением debounce) */
     setBanks({ state, dispatch }) {
       watchEffect(() => {
-        console.log('dispatch fetchBanks')
         const { creditSumDebounce, creditRateDebounce, currentCreditPeriod } = state
         dispatch(
           'banks/fetchBanks',

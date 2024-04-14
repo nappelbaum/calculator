@@ -6,7 +6,6 @@ export default {
     async fetchBanks({ commit, rootGetters }, { sum, rate, period }) {
       const sort = rootGetters['banks/sort']
       const getBanks = await PostService.getBanks(sum, rate, period, sort)
-      console.log(getBanks)
       commit('SET_BANKS', getBanks)
       commit('SET_TOTAL_OFFERS', getBanks)
     },
@@ -17,9 +16,8 @@ export default {
   mutations: {
     /** запись данных о банках с фильтрами*/
     SET_BANKS(state, getBanks) {
-      if (getBanks) {
-        state.banks = getBanks
-      }
+      if (getBanks) state.banks = getBanks
+      else state.banksLoadError = true
     },
     SET_TOTAL_OFFERS(state, getBanks) {
       state.totalOffers = getBanks.reduce((acc, el) => acc + el.creditResultRows.length, 0)
@@ -31,7 +29,8 @@ export default {
   state: {
     banks: [],
     totalOffers: null,
-    sort: ''
+    sort: '',
+    banksLoadError: false
   },
   getters: {
     banks(state) {
@@ -42,6 +41,9 @@ export default {
     },
     sort(state) {
       return state.sort
+    },
+    banksLoadError(state) {
+      return state.banksLoadError
     }
   },
   namespaced: true

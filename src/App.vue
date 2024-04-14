@@ -1,12 +1,6 @@
 <script setup>
-import { onMounted } from 'vue'
 import NavBar from './components/NavBar.vue'
 import MyFooter from './components/MyFooter.vue'
-// import PostService from './API/PostService'
-
-onMounted(async () => {
-  // console.log(await PostService.getBanks())
-})
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import OfferBank from './OfferBank.vue'
 import getNoun from '@/services/getNoun'
@@ -9,14 +9,11 @@ const store = useStore()
 const banksLoadError = computed(() => store.getters['banks/banksLoadError'])
 const banks = computed(() => store.getters['banks/banks'])
 const totalOffers = computed(() => store.getters['banks/totalOffers'])
+const sort = computed(() => store.getters['banks/sort'])
 
 const setSort = (value) => {
   store.dispatch('banks/setSort', value)
 }
-
-onMounted(() => {
-  store.dispatch('banks/setSort', '')
-})
 </script>
 
 <template>
@@ -35,9 +32,10 @@ onMounted(() => {
         <u-select
           class="mb-3"
           :options="[
-            { value: '', name: 'По популярности' },
+            { value: 'pop', name: 'По популярности' },
             { value: 'min', name: 'По минимальному платежу' }
           ]"
+          :sort="sort"
           @setSort="setSort"
         />
       </div>

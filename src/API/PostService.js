@@ -13,7 +13,7 @@ export default class PostService {
       const filteredData = creditsFilter(res.data.groupedCredits, sum, rate, period)
 
       // сортировка массива банков по мин платежу кредита или популярности:
-      if (sort) creditsSort(filteredData)
+      if (sort && sort === 'min') creditsSort(filteredData)
 
       return filteredData
     } catch (err) {

@@ -3,9 +3,8 @@ import PostService from '@/API/PostService'
 export default {
   actions: {
     /** получение данных о банках и кредитах с фильтрами по сумме, ставке и сроке кредита*/
-    async fetchBanks({ commit, rootGetters }, { sum, rate, period }) {
-      const sort = rootGetters['banks/sort']
-      const getBanks = await PostService.getBanks(sum, rate, period, sort)
+    async fetchBanks({ commit, state }, { sum, rate, period }) {
+      const getBanks = await PostService.getBanks(sum, rate, period, state.sort)
       commit('SET_BANKS', getBanks)
       commit('SET_TOTAL_OFFERS', getBanks)
     },

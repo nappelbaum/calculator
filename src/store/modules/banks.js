@@ -48,9 +48,6 @@ export default {
     creditLoadError: false
   },
   getters: {
-    banks(state) {
-      return state.banks
-    },
     totalOffers(state) {
       return state.totalOffers
     },

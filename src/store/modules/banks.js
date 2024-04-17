@@ -1,10 +1,11 @@
 import PostService from '@/API/PostService'
+import creditsSort from '@/services/creditsSort'
 
 export default {
   actions: {
     /** получение данных о банках и кредитах с фильтрами по сумме, ставке и сроке кредита*/
-    async fetchBanks({ commit, state }, { sum, rate, period }) {
-      const getBanks = await PostService.getBanks(sum, rate, period, state.sort)
+    async fetchBanks({ commit }, { sum, rate, period }) {
+      const getBanks = await PostService.getBanks(sum, rate, period)
       commit('SET_BANKS', getBanks)
       commit('SET_TOTAL_OFFERS', getBanks)
     },
@@ -64,6 +65,15 @@ export default {
     },
     creditLoadError(state) {
       return state.creditLoadError
+    },
+    // сортировка массива банков:
+    sortBanks(state) {
+      const copyBanks = JSON.parse(JSON.stringify(state.banks))
+      if (state.sort && state.sort === 'min') {
+        creditsSort(copyBanks)
+        return copyBanks
+      }
+      return state.banks
     }
   },
   namespaced: true

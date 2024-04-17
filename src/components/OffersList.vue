@@ -7,7 +7,7 @@ import getNoun from '@/services/getNoun'
 const store = useStore()
 
 const banksLoadError = computed(() => store.getters['banks/banksLoadError'])
-const banks = computed(() => store.getters['banks/banks'])
+const sortBanks = computed(() => store.getters['banks/sortBanks'])
 const totalOffers = computed(() => store.getters['banks/totalOffers'])
 const sort = computed(() => store.getters['banks/sort'])
 
@@ -42,7 +42,7 @@ const setSort = (value) => {
     </div>
 
     <transition-group tag="ul" name="mybanks" class="d-flex flex-column mb-3 p-0 row">
-      <li v-for="bank in banks" :key="bank.bankId" class="mb-2">
+      <li v-for="bank in sortBanks" :key="bank.bankId" class="mb-2">
         <offer-bank :offer="bank.creditResultRows" />
       </li>
     </transition-group>

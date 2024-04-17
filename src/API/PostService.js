@@ -1,19 +1,15 @@
 import axios from 'axios'
 import creditsFilter from '@/services/creditsFilter'
-import creditsSort from '@/services/creditsSort'
 import findCredit from '@/services/findCredit'
 
 export default class PostService {
   // получение, фильтрация и (при необходимости) сортировка массива всех банков с кредитами:
-  static async getBanks(sum, rate, period, sort) {
+  static async getBanks(sum, rate, period) {
     try {
       const res = await axios.get('/src/API/banksList.json')
 
       // фильтрация массива по параметрам суммы, ставки и срока кредита:
       const filteredData = creditsFilter(res.data.groupedCredits, sum, rate, period)
-
-      // сортировка массива банков по мин платежу кредита или популярности:
-      if (sort && sort === 'min') creditsSort(filteredData)
 
       return filteredData
     } catch (err) {

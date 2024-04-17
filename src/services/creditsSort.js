@@ -1,5 +1,5 @@
-export default function creditsSort(filteredData) {
-  filteredData.sort((a, b) => {
+export default function creditsSort(banks) {
+  banks.sort((a, b) => {
     const minCalc = (credits) => {
       let min = credits[0].rateMin
       for (let i = 1; i < credits.length; i++) {

@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 import toString from '@/services/toString'
 import annCalc from '@/services/annСalc'
 import OfferDropdown from './OfferDropdown.vue'
+import getNoun from '@/services/getNoun'
 
 const store = useStore()
 const show = ref(false)
@@ -62,7 +63,8 @@ defineProps({
               <div class="d-flex justify-content-between mt-2 d-lg-block mt-lg-0">
                 <span>Срок</span>
                 <div class="credit__important-info">
-                  до {{ Math.round(credit.periodTo / 365) }} лет
+                  до {{ Math.round(credit.periodTo / 365) }}
+                  {{ getNoun(Math.round(credit.periodTo / 365), ['года', 'лет', 'лет']) }}
                 </div>
               </div>
             </div>

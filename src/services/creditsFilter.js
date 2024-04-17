@@ -4,8 +4,8 @@ export default function creditsFilter(data, sum, rate, period) {
       (credit) =>
         sum >= credit.amountFrom &&
         sum <= credit.amountTo &&
-        rate >= credit.rateMin &&
-        rate <= credit.rateMax &&
+        rate >= credit.creditRateMin &&
+        rate <= credit.creditRateMax &&
         period >= (credit.periodFrom / 365) * 12 &&
         period <= (credit.periodTo / 365) * 12
     )
